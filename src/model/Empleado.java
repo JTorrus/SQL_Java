@@ -2,6 +2,8 @@ package model;
 import java.util.Date;
 
 public class Empleado {
+    int emplId;
+    int deptId;
     String firstName;
     String secondName;
     String lastName;
@@ -27,7 +29,9 @@ public class Empleado {
         this.lastName = lastName;
     }
 
-    public Empleado(String firstName, String secondName, String lastName, String emplAddress, int emplTelNumber, Date emplBirthDate, boolean emplMarried) {
+    public Empleado(int emplId, int deptId, String firstName, String secondName, String lastName, String emplAddress, int emplTelNumber, Date emplBirthDate, boolean emplMarried) {
+        this.emplId = emplId;
+        this.deptId = deptId;
         this.firstName = firstName;
         this.secondName = secondName;
         this.lastName = lastName;

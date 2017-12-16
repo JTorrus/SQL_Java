@@ -1,10 +1,12 @@
 package model;
 
 public class Departamento {
+    int deptId;
     String deptName;
     String[] probabilities = {"Soporte", "Recursos Humanos", "Android", "iOs", "Finanzas", "Compras"};
 
-    public Departamento(String deptName) {
+    public Departamento(int deptId, String deptName) {
+        this.deptId = deptId;
         this.deptName = deptName;
     }
     
