@@ -15,11 +15,15 @@ public class Departamento {
     }
     
     public String chooseOne() {
-        int choice = (int) Math.floor(Math.random() * this.probabilities.length - 1);
+        int choice = (int) Math.floor(Math.random() * (this.probabilities.length - 1));
         return this.probabilities[choice];
     }
 
     public int getDeptId() {
         return deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
     }
 }
