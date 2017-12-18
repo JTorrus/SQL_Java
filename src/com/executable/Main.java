@@ -1,7 +1,7 @@
-package executable;
+package com.executable;
 
-import model.Departamento;
-import model.Empleado;
+import com.model.Departamento;
+import com.model.Empleado;
 
 public class Main {
     public static void main(String[] args) {

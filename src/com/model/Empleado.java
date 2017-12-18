@@ -1,17 +1,17 @@
-package model;
+package com.model;
 import java.util.Date;
 
 public class Empleado {
-    int emplId;
-    int deptId;
-    String firstName;
-    String secondName;
-    String lastName;
-    String emplAddress;
-    int emplTelNumber;
-    Date emplBirthDate;
-    int emplSalary;
-    boolean emplMarried;
+    private int emplId;
+    private int deptId;
+    private String firstName;
+    private String secondName;
+    private String lastName;
+    private String emplAddress;
+    private int emplTelNumber;
+    private Date emplBirthDate;
+    private int emplSalary;
+    private boolean emplMarried;
     
     String[] firstNameProb = {"Javier", "Nil", "Bhupinder", "Dani", "Hayk", "Amer", "Albert"};
     String[] secondNameProb = {"Martinez", "Fernandez", "Gonzalez"};
@@ -21,6 +21,7 @@ public class Empleado {
         this.firstName = chooseOne()[0];
         this.secondName = chooseOne()[1];
         this.lastName = chooseOne()[2];
+        this.deptId = new Departamento().getDeptId();
     }
 
     public Empleado(String firstName, String secondName, String lastName) {
