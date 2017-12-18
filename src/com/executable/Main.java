@@ -12,26 +12,22 @@ import java.util.Scanner;
 public class Main {
 
     private static Scanner sc = new Scanner(System.in);
+    private static Statement statement;
 
     public static void main(String[] args) {
         showMenu();
     }
 
-    private static void generateRandomInsQuery(Object object) {
-        try (Connection connection = ConnectDB.getInstance();
-                Statement statement = connection.createStatement();) {
-            int queryResult;
+    private static void generateRandomInsQuery(Object object) throws SQLException {
+        statement = ConnectDB.getInstance().createStatement();
+        int queryResult;
 
-            if (object instanceof Departamento) {
-                queryResult = statement.executeUpdate("INSERT INTO departamentos (`dept_name`)" + "VALUES('" + ((Departamento) object).getDeptName() + "')");
-                System.out.println(queryResult + " rows updated");
-            } else {
-                queryResult = statement.executeUpdate("INSERT INTO empleados");
-                System.out.println(queryResult + " rows updated");
-            }
-        } catch (SQLException e) {
-            System.err.println("SQL sentence error in " + e.getSQLState());
-            e.printStackTrace();
+        if (object instanceof Departamento) {
+            queryResult = statement.executeUpdate("INSERT INTO departamentos (`dept_name`)" + "VALUES('" + ((Departamento) object).getDeptName() + "')");
+            System.out.println(queryResult + " row/s updated");
+        } else {
+            queryResult = statement.executeUpdate("INSERT INTO empleados (`dept_id`, `empl_first_name`, `empl_second_name`, `empl_last_name`)" + "VALUES('1', '" + ((Empleado) object).getFirstName() + "', '" + ((Empleado) object).getSecondName() + "', '" + ((Empleado) object).getLastName() + "')");
+            System.out.println(queryResult + " row/s updated");
         }
     }
 
@@ -50,19 +46,34 @@ public class Main {
             System.out.print("Choose an option: ");
             option = sc.nextInt();
 
-            switch (option) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    /*generateRandomInsQuery(new Empleado());*/
-                    generateRandomInsQuery(new Departamento());
-                    break;
+            try {
+                switch (option) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        generateRandomInsQuery(new Departamento());
+                        generateRandomInsQuery(new Empleado());
+                        break;
+                    case 6:
+                        System.out.println("Closing program...");
+                        exit = true;
+                        break;
+                }
+            } catch (SQLException e) {
+                System.err.println("Error in SQL sentence" + e.getSQLState());
+            } finally {
+                try {
+                    ConnectDB.closeConnection();
+                    statement.close();
+                } catch (SQLException e2) {
+                    System.err.println("Error closing connection" + e2.getSQLState());
+                }
             }
         } while (exit != true);
 

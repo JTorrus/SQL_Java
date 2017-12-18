@@ -43,12 +43,30 @@ public class Empleado {
     }
     
     public String[] chooseOne() {
-        int firstChoice = (int) Math.floor(Math.random() * this.firstNameProb.length - 1);
-        int secondChoice = (int) Math.floor(Math.random() * this.secondNameProb.length - 1);
-        int thirdChoice = (int) Math.floor(Math.random() * this.lastNameProb.length - 1);
+        int firstChoice = (int) Math.floor(Math.random() * (this.firstNameProb.length - 1));
+        int secondChoice = (int) Math.floor(Math.random() * (this.secondNameProb.length - 1));
+        int thirdChoice = (int) Math.floor(Math.random() * (this.lastNameProb.length - 1));
         
-        String[] data = {this.firstNameProb[firstChoice], this.firstNameProb[secondChoice], this.firstNameProb[thirdChoice]};
+        String[] data = {this.firstNameProb[firstChoice], this.secondNameProb[secondChoice], this.lastNameProb[thirdChoice]};
         
         return data;
     }
+
+    public int getDeptId() {
+        return deptId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    
+    
 }
