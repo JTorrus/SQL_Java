@@ -76,6 +76,11 @@ public class Main {
 
             System.out.println("Insert employee's salary");
             emplSalary = sc.nextInt();
+            
+            if (emplSalary <= 0) {
+                System.out.println("An employee salary can't be 0 or less, employee's salary value changed to 1");
+                emplSalary = 1;
+            } 
 
             empleado = new Empleado(deptId, firstName, secondName, lastName, emplAddress, emplTelNumber, birthdateParsed, checkMarried(emplMarried), emplSalary);
         } catch (InputMismatchException e) {
@@ -135,7 +140,7 @@ public class Main {
             int i = preparedStatement.executeUpdate();
             System.out.println(i + " row/s updated");
         } catch (MySQLIntegrityConstraintViolationException e) {
-            System.err.println("Couldn't add the employee, the Dept's ID entered doesn't exist");
+            System.err.println("Couldn't add the employee, the Dept's ID entered doesn't exist, use insert random data option from menu or manually create a Dept into the database");
         }
     }
 
@@ -247,7 +252,9 @@ public class Main {
                 e.printStackTrace();
             } finally {
                 try {
-                    ConnectDB.closeConnection();
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
 
                     if (statement != null) {
                         statement.close();
@@ -256,10 +263,8 @@ public class Main {
                     if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-
-                    if (resultSet != null) {
-                        resultSet.close();
-                    }
+                    
+                    ConnectDB.closeConnection();
                 } catch (SQLException e2) {
                     System.err.println("Error closing connection" + e2.getSQLState());
                 }
