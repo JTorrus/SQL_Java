@@ -1,5 +1,10 @@
 package com.model;
-import java.util.Date;
+
+import com.jdbc.utilities.ConnectDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Date;
 
 public class Empleado {
     private int emplId;
@@ -30,8 +35,7 @@ public class Empleado {
         this.lastName = lastName;
     }
 
-    public Empleado(int emplId, int deptId, String firstName, String secondName, String lastName, String emplAddress, int emplTelNumber, Date emplBirthDate, boolean emplMarried) {
-        this.emplId = emplId;
+    public Empleado(int deptId, String firstName, String secondName, String lastName, String emplAddress, int emplTelNumber, Date emplBirthDate, boolean emplMarried, int emplSalary) {
         this.deptId = deptId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -40,6 +44,7 @@ public class Empleado {
         this.emplTelNumber = emplTelNumber;
         this.emplBirthDate = emplBirthDate;
         this.emplMarried = emplMarried;
+        this.emplSalary = emplSalary;
     }
     
     public String[] chooseOne() {
@@ -67,6 +72,24 @@ public class Empleado {
     public String getLastName() {
         return lastName;
     }
-    
-    
+
+    public String getEmplAddress() {
+        return emplAddress;
+    }
+
+    public int getEmplTelNumber() {
+        return emplTelNumber;
+    }
+
+    public Date getEmplBirthDate() {
+        return emplBirthDate;
+    }
+
+    public int getEmplSalary() {
+        return emplSalary;
+    }
+
+    public boolean isEmplMarried() {
+        return emplMarried;
+    }
 }
